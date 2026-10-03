@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#05090d"/><stop offset="1" stop-color="#0c2029"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0v40" fill="none" stroke="#35e6f2" stroke-opacity=".06"/></pattern></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="955" cy="315" r="205" fill="none" stroke="#35e6f2" stroke-opacity=".18"/><circle cx="955" cy="315" r="160" fill="none" stroke="#35e6f2" stroke-opacity=".45" stroke-dasharray="3 12 42 8"/><circle cx="955" cy="315" r="112" fill="none" stroke="#ffb84d" stroke-opacity=".28" stroke-dasharray="68 28"/><path d="m955 235 69 40v80l-69 40-69-40v-80z" fill="#35e6f2" fill-opacity=".06" stroke="#35e6f2"/><circle cx="955" cy="315" r="18" fill="#35e6f2"/>
+  <text x="76" y="104" fill="#35e6f2" font-family="monospace" font-size="18" letter-spacing="4">MS//DEV · SYSTEM ONLINE</text>
+  <text x="76" y="245" fill="#eaf7fa" font-family="Arial, sans-serif" font-size="72" font-weight="700">Marcelo Soiber</text>
+  <text x="76" y="326" fill="#eaf7fa" font-family="Arial, sans-serif" font-size="42" font-weight="600">Software Engineering</text>
+  <text x="76" y="380" fill="#35e6f2" font-family="Arial, sans-serif" font-size="42" font-weight="600">Architecture &amp; Applied AI</text>
+  <text x="76" y="526" fill="#78939d" font-family="monospace" font-size="18" letter-spacing="2">MARCELOSOIBER.DEV</text>
+</svg>
