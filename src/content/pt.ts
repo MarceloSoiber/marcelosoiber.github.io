@@ -112,7 +112,7 @@ export const pt: SiteContent = {
           'Combinar modelagem temporal, explicabilidade e agentes generativos para apoiar — não substituir — a análise humana.',
         result:
           'Um ambiente aplicado para investigar risco, interpretar sinais e experimentar fluxos de decisão assistida.',
-        technologies: ['Python', 'Deep Learning', 'TensorFlow', 'XAI', 'Generative AI'],
+        technologies: ['Python', 'FastAPI', 'PyTorch', 'scikit-learn', 'PostgreSQL', 'LangGraph'],
         repository: 'https://github.com/MarceloSoiber/credit-card-fraud-detection',
         image: '/images/fraud-detection.svg',
         imageAlt: 'Visualização abstrata de análise de transações e detecção de anomalias',
