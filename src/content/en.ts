@@ -27,7 +27,7 @@ export const en: SiteContent = {
     description:
       'Software Engineer specializing in architecture, intelligent systems, and applied AI. Over nine years turning real problems into reliable software.',
     primaryCta: 'Explore systems',
-    secondaryCta: 'Download résumé',
+    secondaryCta: 'Download CV',
     telemetryLabel: 'Professional core',
     telemetryValue: 'ARCH · AI · SYSTEMS',
     statusLabel: 'Operational',
@@ -204,7 +204,7 @@ export const en: SiteContent = {
     emailLabel: 'Send email',
     linkedinLabel: 'LinkedIn',
     githubLabel: 'GitHub',
-    resumeLabel: 'Download résumé',
+    resumeLabel: 'Download CV',
     resumeHref: '/cv/Curriculo_Marcelo_Soiber_EN.pdf',
     resumeLanguage: 'PDF · EN',
     resumeFilename: 'Curriculo_Marcelo_Soiber_EN.pdf',
