@@ -132,7 +132,11 @@ onBeforeUnmount(() => observer?.disconnect())
               {{ content.hero.primaryCta }}
               <span aria-hidden="true">↘</span>
             </a>
-            <a class="button button--ghost" :href="content.contact.resumeHref" download>
+            <a
+              class="button button--ghost"
+              :href="content.contact.resumeHref"
+              :download="content.contact.resumeFilename"
+            >
               {{ content.hero.secondaryCta }}
             </a>
           </div>
@@ -300,9 +304,13 @@ onBeforeUnmount(() => observer?.disconnect())
               <strong>@MarceloSoiber</strong>
               <i aria-hidden="true">↗</i>
             </a>
-            <a class="contact-link" :href="content.contact.resumeHref" download>
+            <a
+              class="contact-link"
+              :href="content.contact.resumeHref"
+              :download="content.contact.resumeFilename"
+            >
               <span>{{ content.contact.resumeLabel }}</span>
-              <strong>PDF · PT-BR</strong>
+              <strong>{{ content.contact.resumeLanguage }}</strong>
               <i aria-hidden="true">↓</i>
             </a>
           </div>

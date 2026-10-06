@@ -111,6 +111,8 @@ export interface SiteContent {
     githubLabel: string
     resumeLabel: string
     resumeHref: string
+    resumeLanguage: string
+    resumeFilename: string
   }
   footer: string
 }

@@ -205,7 +205,9 @@ export const en: SiteContent = {
     linkedinLabel: 'LinkedIn',
     githubLabel: 'GitHub',
     resumeLabel: 'Download résumé',
-    resumeHref: '/cv/Curriculo_Marcelo_Soiber.pdf',
+    resumeHref: '/cv/Curriculo_Marcelo_Soiber_EN.pdf',
+    resumeLanguage: 'PDF · EN',
+    resumeFilename: 'Curriculo_Marcelo_Soiber_EN.pdf',
   },
   footer: 'Designed and built by Marcelo Soiber. System updated in 2026.',
 }

@@ -207,7 +207,9 @@ export const es: SiteContent = {
     linkedinLabel: 'LinkedIn',
     githubLabel: 'GitHub',
     resumeLabel: 'Descargar currículum',
-    resumeHref: '/cv/Curriculo_Marcelo_Soiber.pdf',
+    resumeHref: '/cv/Curriculo_Marcelo_Soiber_ES.pdf',
+    resumeLanguage: 'PDF · ES',
+    resumeFilename: 'Curriculo_Marcelo_Soiber_ES.pdf',
   },
   footer: 'Diseñado y construido por Marcelo Soiber. Sistema actualizado en 2026.',
 }
