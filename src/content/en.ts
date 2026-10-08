@@ -201,6 +201,11 @@ export const en: SiteContent = {
     title: 'Let’s talk about systems worth building.',
     description:
       'Architecture, applied AI, software engineering, or a good technical question: the channel is open.',
+    dialogLabel: 'Marcelo Soiber contact details',
+    closeLabel: 'Close contact',
+    role: 'Software Engineer · Architecture & AI',
+    location: 'Tubarão, SC · Brazil',
+    photoAlt: 'Professional portrait of Marcelo Soiber',
     emailLabel: 'Send email',
     linkedinLabel: 'LinkedIn',
     githubLabel: 'GitHub',

@@ -203,6 +203,11 @@ export const es: SiteContent = {
     title: 'Hablemos de sistemas que vale la pena construir.',
     description:
       'Arquitectura, IA aplicada, ingeniería de software o una buena pregunta técnica: el canal está abierto.',
+    dialogLabel: 'Datos de contacto de Marcelo Soiber',
+    closeLabel: 'Cerrar contacto',
+    role: 'Ingeniero de Software · Arquitectura e IA',
+    location: 'Tubarão, SC · Brasil',
+    photoAlt: 'Retrato profesional de Marcelo Soiber',
     emailLabel: 'Enviar correo',
     linkedinLabel: 'LinkedIn',
     githubLabel: 'GitHub',

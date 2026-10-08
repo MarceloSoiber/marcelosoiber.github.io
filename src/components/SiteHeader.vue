@@ -14,9 +14,17 @@ defineProps<{
 }>()
 
 const menuOpen = ref(false)
+const emit = defineEmits<{
+  openContact: []
+}>()
 
 function closeMenu() {
   menuOpen.value = false
+}
+
+function openContact() {
+  closeMenu()
+  emit('openContact')
 }
 </script>
 
@@ -48,9 +56,18 @@ function closeMenu() {
 
       <div id="site-navigation" class="site-header__panel" :class="{ 'is-open': menuOpen }">
         <nav class="site-nav" :aria-label="navigationLabel">
-          <a v-for="item in nav" :key="item.href" :href="item.href" @click="closeMenu">
-            {{ item.label }}
-          </a>
+          <template v-for="item in nav" :key="item.href">
+            <button
+              v-if="item.href === '#contato'"
+              class="site-nav__contact"
+              type="button"
+              @click="openContact"
+            >
+              {{ item.label }}
+              <span aria-hidden="true">↗</span>
+            </button>
+            <a v-else :href="item.href" @click="closeMenu">{{ item.label }}</a>
+          </template>
         </nav>
 
         <nav class="language-nav" :aria-label="languageLabel">

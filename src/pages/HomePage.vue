@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import ProjectCaseStudy from '../components/ProjectCaseStudy.vue'
@@ -17,6 +17,7 @@ const locale = computed<Locale>(() => {
 const content = computed(() => contentByLocale[locale.value])
 const canonical = computed(() => `https://marcelosoiber.dev${localeRoutes[locale.value]}`)
 const email = ['marcelo.soiber', 'gmail.com'].join('@')
+const contactDialog = ref<HTMLDialogElement>()
 const jobTitles: Record<Locale, string> = {
   pt: 'Engenheiro de Software',
   en: 'Software Engineer',
@@ -74,33 +75,49 @@ useHead(() => ({
 
 let observer: IntersectionObserver | undefined
 
+function openContact() {
+  if (!contactDialog.value?.open) contactDialog.value?.showModal()
+}
+
+function closeContact() {
+  contactDialog.value?.close()
+}
+
+function closeContactOnBackdrop(event: MouseEvent) {
+  if (event.target === contactDialog.value) closeContact()
+}
+
 onMounted(() => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const elements = document.querySelectorAll<HTMLElement>('.reveal')
 
   if (prefersReducedMotion || !('IntersectionObserver' in window)) {
     elements.forEach((element) => element.classList.add('is-visible'))
-    return
+  } else {
+    document.documentElement.classList.add('has-motion')
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer?.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+    )
+
+    elements.forEach((element) => observer?.observe(element))
   }
 
-  document.documentElement.classList.add('has-motion')
-
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible')
-          observer?.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
-  )
-
-  elements.forEach((element) => observer?.observe(element))
+  if (window.location.hash === '#contato') openContact()
 })
 
-onBeforeUnmount(() => observer?.disconnect())
+onBeforeUnmount(() => {
+  observer?.disconnect()
+  closeContact()
+})
 </script>
 
 <template>
@@ -116,6 +133,7 @@ onBeforeUnmount(() => observer?.disconnect())
       :navigation-label="content.navigationLabel"
       :language-label="content.languageLabel"
       :nav="content.nav"
+      @open-contact="openContact"
     />
 
     <main id="main">
@@ -268,54 +286,6 @@ onBeforeUnmount(() => observer?.disconnect())
           </a>
         </div>
       </section>
-
-      <section id="contato" class="contact section-shell">
-        <div class="contact__panel reveal">
-          <div class="contact__signal" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <p class="eyebrow">{{ content.contact.eyebrow }}</p>
-          <h2>{{ content.contact.title }}</h2>
-          <p>{{ content.contact.description }}</p>
-
-          <div class="contact__links">
-            <a class="contact-link contact-link--email" :href="`mailto:${email}`">
-              <span>{{ content.contact.emailLabel }}</span>
-              <strong>{{ email }}</strong>
-              <i aria-hidden="true">↗</i>
-            </a>
-            <a
-              class="contact-link"
-              href="https://www.linkedin.com/in/marcelo-soiber-6a87644a/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>{{ content.contact.linkedinLabel }}</span>
-              <strong>/in/marcelo-soiber</strong>
-              <i aria-hidden="true">↗</i>
-            </a>
-            <a
-              class="contact-link"
-              href="https://github.com/MarceloSoiber"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>{{ content.contact.githubLabel }}</span>
-              <strong>@MarceloSoiber</strong>
-              <i aria-hidden="true">↗</i>
-            </a>
-            <a
-              class="contact-link"
-              :href="content.contact.resumeHref"
-              :download="content.contact.resumeFilename"
-            >
-              <span>{{ content.contact.resumeLabel }}</span>
-              <strong>{{ content.contact.resumeLanguage }}</strong>
-              <i aria-hidden="true">↓</i>
-            </a>
-          </div>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
@@ -327,5 +297,93 @@ onBeforeUnmount(() => observer?.disconnect())
       <p>{{ content.footer }}</p>
       <a href="#top">TOP ↑</a>
     </footer>
+
+    <dialog
+      id="contato"
+      ref="contactDialog"
+      class="contact-modal"
+      :aria-label="content.contact.dialogLabel"
+      @click="closeContactOnBackdrop"
+    >
+      <div class="contact-modal__frame">
+        <div class="contact-modal__status" aria-hidden="true">
+          <span>CONTACT.NODE</span>
+          <i></i>
+          <span>CHANNEL // OPEN</span>
+        </div>
+
+        <button
+          class="contact-modal__close"
+          type="button"
+          :aria-label="content.contact.closeLabel"
+          @click="closeContact"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="contact-modal__grid">
+          <figure class="contact-modal__portrait">
+            <div class="contact-modal__portrait-frame">
+              <img
+                src="/images/marcelo-soiber-linkedin.jpg"
+                :alt="content.contact.photoAlt"
+                width="200"
+                height="200"
+              />
+            </div>
+            <figcaption>
+              <span>MS.01</span>
+              <strong>Marcelo Soiber</strong>
+              <small>{{ content.contact.location }}</small>
+            </figcaption>
+          </figure>
+
+          <div class="contact-modal__content">
+            <p class="eyebrow">{{ content.contact.eyebrow }}</p>
+            <p class="contact-modal__role">{{ content.contact.role }}</p>
+            <h2>{{ content.contact.title }}</h2>
+            <p class="contact-modal__description">{{ content.contact.description }}</p>
+
+            <div class="contact-modal__links">
+              <a class="contact-action contact-action--email" :href="`mailto:${email}`">
+                <span>{{ content.contact.emailLabel }}</span>
+                <strong>{{ email }}</strong>
+                <i aria-hidden="true">↗</i>
+              </a>
+              <a
+                class="contact-action"
+                href="https://www.linkedin.com/in/marcelo-soiber-6a87644a/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>{{ content.contact.linkedinLabel }}</span>
+                <strong>/in/marcelo-soiber</strong>
+                <i aria-hidden="true">↗</i>
+              </a>
+              <a
+                class="contact-action"
+                href="https://github.com/MarceloSoiber"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>{{ content.contact.githubLabel }}</span>
+                <strong>@MarceloSoiber</strong>
+                <i aria-hidden="true">↗</i>
+              </a>
+              <a
+                class="contact-action"
+                :href="content.contact.resumeHref"
+                :download="content.contact.resumeFilename"
+              >
+                <span>{{ content.contact.resumeLabel }}</span>
+                <strong>{{ content.contact.resumeLanguage }}</strong>
+                <i aria-hidden="true">↓</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
   </div>
 </template>

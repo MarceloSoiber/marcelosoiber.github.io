@@ -106,6 +106,11 @@ export interface SiteContent {
     eyebrow: string
     title: string
     description: string
+    dialogLabel: string
+    closeLabel: string
+    role: string
+    location: string
+    photoAlt: string
     emailLabel: string
     linkedinLabel: string
     githubLabel: string
