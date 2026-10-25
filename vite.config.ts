@@ -12,6 +12,19 @@ export default defineConfig({
   ssgOptions: {
     script: 'defer',
     formatting: 'minify',
-    includedRoutes: () => ['/', '/en/', '/es/'],
+    includedRoutes: () => [
+      '/',
+      '/perfil/',
+      '/projetos/',
+      '/experiencia/',
+      '/en/',
+      '/en/profile/',
+      '/en/projects/',
+      '/en/experience/',
+      '/es/',
+      '/es/perfil/',
+      '/es/proyectos/',
+      '/es/experiencia/',
+    ],
   },
 })

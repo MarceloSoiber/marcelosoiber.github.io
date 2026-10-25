@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import ProjectCaseStudy from '../components/ProjectCaseStudy.vue'
 import SectionHeader from '../components/SectionHeader.vue'
 import SiteHeader from '../components/SiteHeader.vue'
 import TelemetryCore from '../components/TelemetryCore.vue'
-import { contentByLocale, isLocale, localeRoutes } from '../content'
-import type { Locale } from '../content/schema'
+import { contentByLocale, isLocale, pageRoute } from '../content'
+import type { Locale, Page } from '../content/schema'
 
 const route = useRoute()
 const locale = computed<Locale>(() => {
@@ -15,7 +15,17 @@ const locale = computed<Locale>(() => {
   return isLocale(value) ? value : 'pt'
 })
 const content = computed(() => contentByLocale[locale.value])
-const canonical = computed(() => `https://marcelosoiber.dev${localeRoutes[locale.value]}`)
+const currentPage = computed<Page>(() => {
+  const value = route.meta.page
+  return value === 'profile' || value === 'projects' || value === 'experience' ? value : 'home'
+})
+const canonical = computed(() => `https://marcelosoiber.dev${pageRoute(locale.value, currentPage.value)}`)
+const pageTitle = computed(() => {
+  if (currentPage.value === 'profile') return content.value.profile.title
+  if (currentPage.value === 'projects') return content.value.projects.title
+  if (currentPage.value === 'experience') return content.value.experience.title
+  return content.value.meta.title
+})
 const email = ['marcelo.soiber', 'gmail.com'].join('@')
 const contactDialog = ref<HTMLDialogElement>()
 const jobTitles: Record<Locale, string> = {
@@ -25,29 +35,29 @@ const jobTitles: Record<Locale, string> = {
 }
 
 useHead(() => ({
-  title: content.value.meta.title,
+  title: currentPage.value === 'home' ? pageTitle.value : `${pageTitle.value} — Marcelo Soiber`,
   htmlAttrs: { lang: content.value.htmlLang },
   meta: [
     { name: 'description', content: content.value.meta.description },
     { name: 'author', content: 'Marcelo Soiber' },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'Marcelo Soiber' },
-    { property: 'og:title', content: content.value.meta.title },
+    { property: 'og:title', content: pageTitle.value },
     { property: 'og:description', content: content.value.meta.description },
     { property: 'og:url', content: canonical.value },
     { property: 'og:image', content: 'https://marcelosoiber.dev/images/social-card.png' },
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: content.value.meta.title },
+    { name: 'twitter:title', content: pageTitle.value },
     { name: 'twitter:description', content: content.value.meta.description },
   ],
   link: [
     { rel: 'canonical', href: canonical.value },
-    { rel: 'alternate', hreflang: 'pt-BR', href: 'https://marcelosoiber.dev/' },
-    { rel: 'alternate', hreflang: 'en', href: 'https://marcelosoiber.dev/en/' },
-    { rel: 'alternate', hreflang: 'es', href: 'https://marcelosoiber.dev/es/' },
-    { rel: 'alternate', hreflang: 'x-default', href: 'https://marcelosoiber.dev/' },
+    { rel: 'alternate', hreflang: 'pt-BR', href: `https://marcelosoiber.dev${pageRoute('pt', currentPage.value)}` },
+    { rel: 'alternate', hreflang: 'en', href: `https://marcelosoiber.dev${pageRoute('en', currentPage.value)}` },
+    { rel: 'alternate', hreflang: 'es', href: `https://marcelosoiber.dev${pageRoute('es', currentPage.value)}` },
+    { rel: 'alternate', hreflang: 'x-default', href: `https://marcelosoiber.dev${pageRoute('pt', currentPage.value)}` },
   ],
   script: [
     {
@@ -75,6 +85,33 @@ useHead(() => ({
 
 let observer: IntersectionObserver | undefined
 
+function initializeReveals() {
+  observer?.disconnect()
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const elements = document.querySelectorAll<HTMLElement>('.reveal')
+
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    elements.forEach((element) => element.classList.add('is-visible'))
+    return
+  }
+
+  document.documentElement.classList.add('has-motion')
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer?.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+  )
+
+  elements.forEach((element) => observer?.observe(element))
+}
+
 function openContact() {
   if (!contactDialog.value?.open) contactDialog.value?.showModal()
 }
@@ -88,30 +125,14 @@ function closeContactOnBackdrop(event: MouseEvent) {
 }
 
 onMounted(() => {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const elements = document.querySelectorAll<HTMLElement>('.reveal')
-
-  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    elements.forEach((element) => element.classList.add('is-visible'))
-  } else {
-    document.documentElement.classList.add('has-motion')
-
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            observer?.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
-    )
-
-    elements.forEach((element) => observer?.observe(element))
-  }
+  initializeReveals()
 
   if (window.location.hash === '#contato') openContact()
+})
+
+watch(currentPage, async () => {
+  await nextTick()
+  initializeReveals()
 })
 
 onBeforeUnmount(() => {
@@ -133,11 +154,12 @@ onBeforeUnmount(() => {
       :navigation-label="content.navigationLabel"
       :language-label="content.languageLabel"
       :nav="content.nav"
+      :current-page="currentPage"
       @open-contact="openContact"
     />
 
-    <main id="main">
-      <section class="hero" aria-labelledby="hero-title">
+    <main id="main" :class="{ 'inner-page': currentPage !== 'home' }">
+      <section v-if="currentPage === 'home'" class="hero" aria-labelledby="hero-title">
         <div class="hero__copy">
           <p class="eyebrow hero__eyebrow">{{ content.hero.eyebrow }}</p>
           <h1 id="hero-title">
@@ -146,10 +168,10 @@ onBeforeUnmount(() => {
           </h1>
           <p class="hero__description">{{ content.hero.description }}</p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#projetos">
+            <RouterLink class="button button--primary" :to="pageRoute(locale, 'projects')">
               {{ content.hero.primaryCta }}
               <span aria-hidden="true">↘</span>
-            </a>
+            </RouterLink>
             <a
               class="button button--ghost"
               :href="content.contact.resumeHref"
@@ -178,7 +200,7 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-      <section id="perfil" class="profile section-shell">
+      <section v-if="currentPage === 'profile'" id="perfil" class="profile section-shell page-section">
         <SectionHeader :eyebrow="content.profile.eyebrow" :title="content.profile.title" />
 
         <div class="profile__grid reveal">
@@ -193,7 +215,7 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-      <section class="capabilities section-shell">
+      <section v-if="currentPage === 'profile'" class="capabilities section-shell">
         <SectionHeader
           :eyebrow="content.capabilities.eyebrow"
           :title="content.capabilities.title"
@@ -219,7 +241,12 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-      <section id="projetos" class="projects section-shell">
+      <section
+        v-if="currentPage === 'projects' || currentPage === 'home'"
+        id="projetos"
+        class="projects section-shell"
+        :class="{ 'projects--featured': currentPage === 'home' }"
+      >
         <SectionHeader
           :eyebrow="content.projects.eyebrow"
           :title="content.projects.title"
@@ -228,7 +255,7 @@ onBeforeUnmount(() => {
 
         <div class="projects__list">
           <ProjectCaseStudy
-            v-for="(project, index) in content.projects.items"
+            v-for="(project, index) in currentPage === 'home' ? content.projects.items.slice(0, 1) : content.projects.items"
             :key="project.id"
             :project="project"
             :position="index"
@@ -238,9 +265,17 @@ onBeforeUnmount(() => {
             :result-label="content.projects.resultLabel"
           />
         </div>
+
+        <RouterLink
+          v-if="currentPage === 'home'"
+          class="section-more"
+          :to="pageRoute(locale, 'projects')"
+        >
+          {{ content.hero.primaryCta }} <span aria-hidden="true">→</span>
+        </RouterLink>
       </section>
 
-      <section id="experiencia" class="experience section-shell">
+      <section v-if="currentPage === 'experience'" id="experiencia" class="experience section-shell page-section">
         <SectionHeader :eyebrow="content.experience.eyebrow" :title="content.experience.title" />
 
         <ol class="timeline">
@@ -264,7 +299,7 @@ onBeforeUnmount(() => {
         </ol>
       </section>
 
-      <section class="notes section-shell">
+      <section v-if="currentPage === 'projects'" class="notes section-shell">
         <SectionHeader
           :eyebrow="content.notes.eyebrow"
           :title="content.notes.title"
@@ -277,7 +312,7 @@ onBeforeUnmount(() => {
             :key="note.code"
             class="note-card reveal"
             :style="{ '--delay': `${index * 80}ms` }"
-            :href="`#${note.projectId}`"
+            :href="`${pageRoute(locale, 'projects')}#${note.projectId}`"
           >
             <span>{{ note.code }}</span>
             <h3>{{ note.title }}</h3>
@@ -289,11 +324,11 @@ onBeforeUnmount(() => {
     </main>
 
     <footer class="site-footer">
-      <a class="brand" href="#top" :aria-label="content.brandLabel">
+      <RouterLink class="brand" :to="pageRoute(locale, 'home')" :aria-label="content.brandLabel">
         <span class="brand__mark" aria-hidden="true">MS</span>
         <span class="brand__slash" aria-hidden="true">//</span>
         <span class="brand__suffix">DEV</span>
-      </a>
+      </RouterLink>
       <p>{{ content.footer }}</p>
       <a href="#top">TOP ↑</a>
     </footer>

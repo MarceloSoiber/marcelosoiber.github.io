@@ -14,10 +14,10 @@ export const pt: SiteContent = {
   availability: 'Sistema online · Tubarão, SC',
   navigationLabel: 'Navegação principal',
   nav: [
-    { label: 'Perfil', href: '#perfil' },
-    { label: 'Sistemas', href: '#projetos' },
-    { label: 'Experiência', href: '#experiencia' },
-    { label: 'Contato', href: '#contato' },
+    { label: 'Perfil', page: 'profile' },
+    { label: 'Sistemas', page: 'projects' },
+    { label: 'Experiência', page: 'experience' },
+    { label: 'Contato', page: 'contact' },
   ],
   languageLabel: 'Selecionar idioma',
   hero: {
@@ -40,7 +40,7 @@ export const pt: SiteContent = {
       'Atuo há mais de nove anos no desenvolvimento de software, incluindo soluções para meios de pagamentos. Trabalho com Python, PHP e TypeScript, conectando APIs, dados, aplicações web e inteligência artificial com atenção a privacidade, operação e resultado de negócio.',
     metrics: [
       { value: '9+', label: 'anos de engenharia' },
-      { value: '03', label: 'sistemas em destaque' },
+      { value: '04', label: 'sistemas em destaque' },
       { value: 'PT·EN·ES', label: 'presença internacional' },
     ],
   },
@@ -74,15 +74,34 @@ export const pt: SiteContent = {
     eyebrow: '03 // SISTEMAS SELECIONADOS',
     title: 'Projetos tratados como decisões de engenharia.',
     description:
-      'Três estudos de caso que exploram conhecimento, risco e otimização sob perspectivas diferentes.',
+      'Quatro estudos de caso que exploram arquitetura, conhecimento, risco e otimização sob perspectivas diferentes.',
     repositoryLabel: 'Examinar código',
     challengeLabel: 'Desafio',
     decisionLabel: 'Decisão',
     resultLabel: 'Resultado',
     items: [
       {
-        id: 'knowledge-hub',
+        id: 'adr-forge',
         index: 'SYS.01',
+        name: 'ADR Forge',
+        eyebrow: 'ARCHITECTURE · RAG · FINE-TUNING',
+        summary:
+          'Laboratório local-first para analisar decisões arquiteturais e avaliar estratégias de modelos de linguagem com rigor reproduzível.',
+        challenge:
+          'Comparar prompting, recuperação de contexto e fine-tuning sem perder rastreabilidade nem transformar recomendações de IA em decisões automáticas.',
+        decision:
+          'Construir um monólito modular com FastAPI, React e SQLite, usando revisões imutáveis, snapshots de contexto e validação determinística do contrato de ADR.',
+        result:
+          'Um fluxo auditável que gera ADRs, monitora execuções em tempo real e permite comparações cegas com avaliação humana e proveniência preservada.',
+        technologies: ['Python', 'FastAPI', 'React', 'TypeScript', 'SQLite', 'Transformers'],
+        repository: 'https://github.com/MarceloSoiber/adr-forge',
+        image: '/images/adr-forge.png',
+        imageAlt: 'Interface do ADR Forge exibindo um laboratório de decisões arquiteturais',
+        accent: 'cyan',
+      },
+      {
+        id: 'knowledge-hub',
+        index: 'SYS.02',
         name: 'Knowledge Hub',
         eyebrow: 'RAG · LOCAL FIRST · MCP',
         summary:
@@ -101,7 +120,7 @@ export const pt: SiteContent = {
       },
       {
         id: 'fraud-detection',
-        index: 'SYS.02',
+        index: 'SYS.03',
         name: 'Credit Card Fraud Detection',
         eyebrow: 'MACHINE LEARNING · XAI · RISK',
         summary:
@@ -120,7 +139,7 @@ export const pt: SiteContent = {
       },
       {
         id: 'knights-tour',
-        index: 'SYS.03',
+        index: 'SYS.04',
         name: "Knight's Tour",
         eyebrow: 'GENETIC ALGORITHM · JOBS · SSE',
         summary:

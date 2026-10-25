@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest'
-import { contentByLocale, localeRoutes } from '../src/content'
+import { contentByLocale, localeRoutes, pageRoute } from '../src/content'
 
 describe('localized portfolio content', () => {
   it('defines all supported locales and paths', () => {
     expect(Object.keys(contentByLocale).sort()).toEqual(['en', 'es', 'pt'])
     expect(localeRoutes).toEqual({ pt: '/', en: '/en/', es: '/es/' })
+  })
+
+  it('creates localized page routes', () => {
+    expect(pageRoute('pt', 'projects')).toBe('/projetos/')
+    expect(pageRoute('en', 'profile')).toBe('/en/profile/')
+    expect(pageRoute('es', 'experience')).toBe('/es/experiencia/')
   })
 
   it('keeps the same project ids and valid repositories across locales', () => {
@@ -14,7 +20,7 @@ describe('localized portfolio content', () => {
       expect(content.projects.items.map((project) => project.id)).toEqual(expectedIds)
       for (const project of content.projects.items) {
         expect(project.repository).toMatch(/^https:\/\/github\.com\/MarceloSoiber\//)
-        expect(project.image).toMatch(/^\/images\/.+\.svg$/)
+        expect(project.image).toMatch(/^\/images\/.+\.(svg|png)$/)
       }
     }
   })
@@ -24,6 +30,12 @@ describe('localized portfolio content', () => {
 
     for (const content of Object.values(contentByLocale)) {
       expect(content.nav).toHaveLength(baseline.nav.length)
+      expect(content.nav.map((item) => item.page)).toEqual([
+        'profile',
+        'projects',
+        'experience',
+        'contact',
+      ])
       expect(content.capabilities.items).toHaveLength(baseline.capabilities.items.length)
       expect(content.experience.items).toHaveLength(baseline.experience.items.length)
       expect(content.notes.items).toHaveLength(baseline.notes.items.length)

@@ -19,4 +19,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://marcelosoiber.dev/en/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://marcelosoiber.dev/es/" />
   </url>
+  <url><loc>https://marcelosoiber.dev/perfil/</loc></url>
+  <url><loc>https://marcelosoiber.dev/projetos/</loc></url>
+  <url><loc>https://marcelosoiber.dev/experiencia/</loc></url>
+  <url><loc>https://marcelosoiber.dev/en/profile/</loc></url>
+  <url><loc>https://marcelosoiber.dev/en/projects/</loc></url>
+  <url><loc>https://marcelosoiber.dev/en/experience/</loc></url>
+  <url><loc>https://marcelosoiber.dev/es/perfil/</loc></url>
+  <url><loc>https://marcelosoiber.dev/es/proyectos/</loc></url>
+  <url><loc>https://marcelosoiber.dev/es/experiencia/</loc></url>
 </urlset>

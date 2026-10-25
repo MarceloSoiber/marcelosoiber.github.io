@@ -1,8 +1,9 @@
 export type Locale = 'pt' | 'en' | 'es'
+export type Page = 'home' | 'profile' | 'projects' | 'experience'
 
 export interface NavItem {
   label: string
-  href: string
+  page: Page | 'contact'
 }
 
 export interface Project {

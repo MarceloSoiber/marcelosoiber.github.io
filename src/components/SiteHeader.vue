@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { localeRoutes } from '../content'
-import type { Locale, NavItem } from '../content/schema'
+import { pageRoute } from '../content'
+import type { Locale, NavItem, Page } from '../content/schema'
 
 defineProps<{
   locale: Locale
@@ -11,6 +11,7 @@ defineProps<{
   navigationLabel: string
   languageLabel: string
   nav: NavItem[]
+  currentPage: Page
 }>()
 
 const menuOpen = ref(false)
@@ -31,11 +32,11 @@ function openContact() {
 <template>
   <header class="site-header">
     <div class="site-header__inner">
-      <a class="brand" href="#top" :aria-label="brandLabel" @click="closeMenu">
+      <RouterLink class="brand" :to="pageRoute(locale, 'home')" :aria-label="brandLabel" @click="closeMenu">
         <span class="brand__mark" aria-hidden="true">MS</span>
         <span class="brand__slash" aria-hidden="true">//</span>
         <span class="brand__suffix">DEV</span>
-      </a>
+      </RouterLink>
 
       <p class="system-status">
         <span class="system-status__pulse" aria-hidden="true"></span>
@@ -56,9 +57,9 @@ function openContact() {
 
       <div id="site-navigation" class="site-header__panel" :class="{ 'is-open': menuOpen }">
         <nav class="site-nav" :aria-label="navigationLabel">
-          <template v-for="item in nav" :key="item.href">
+          <template v-for="item in nav" :key="item.page">
             <button
-              v-if="item.href === '#contato'"
+              v-if="item.page === 'contact'"
               class="site-nav__contact"
               type="button"
               @click="openContact"
@@ -66,7 +67,14 @@ function openContact() {
               {{ item.label }}
               <span aria-hidden="true">↗</span>
             </button>
-            <a v-else :href="item.href" @click="closeMenu">{{ item.label }}</a>
+            <RouterLink
+              v-else
+              :to="pageRoute(locale, item.page)"
+              :aria-current="currentPage === item.page ? 'page' : undefined"
+              @click="closeMenu"
+            >
+              {{ item.label }}
+            </RouterLink>
           </template>
         </nav>
 
@@ -74,7 +82,7 @@ function openContact() {
           <RouterLink
             v-for="option in (['pt', 'en', 'es'] as Locale[])"
             :key="option"
-            :to="localeRoutes[option]"
+            :to="pageRoute(option, currentPage)"
             :hreflang="option === 'pt' ? 'pt-BR' : option"
             :aria-current="locale === option ? 'page' : undefined"
             @click="closeMenu"
