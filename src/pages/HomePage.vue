@@ -3,11 +3,12 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import ProjectCaseStudy from '../components/ProjectCaseStudy.vue'
+import ProjectDetailsModal from '../components/ProjectDetailsModal.vue'
 import SectionHeader from '../components/SectionHeader.vue'
 import SiteHeader from '../components/SiteHeader.vue'
 import TelemetryCore from '../components/TelemetryCore.vue'
 import { contentByLocale, isLocale, pageRoute } from '../content'
-import type { Locale, Page } from '../content/schema'
+import type { Locale, Page, Project } from '../content/schema'
 
 const route = useRoute()
 const locale = computed<Locale>(() => {
@@ -28,6 +29,7 @@ const pageTitle = computed(() => {
 })
 const email = ['marcelo.soiber', 'gmail.com'].join('@')
 const contactDialog = ref<HTMLDialogElement>()
+const selectedProject = ref<Project | null>(null)
 const jobTitles: Record<Locale, string> = {
   pt: 'Engenheiro de Software',
   en: 'Software Engineer',
@@ -54,10 +56,26 @@ useHead(() => ({
   ],
   link: [
     { rel: 'canonical', href: canonical.value },
-    { rel: 'alternate', hreflang: 'pt-BR', href: `https://marcelosoiber.dev${pageRoute('pt', currentPage.value)}` },
-    { rel: 'alternate', hreflang: 'en', href: `https://marcelosoiber.dev${pageRoute('en', currentPage.value)}` },
-    { rel: 'alternate', hreflang: 'es', href: `https://marcelosoiber.dev${pageRoute('es', currentPage.value)}` },
-    { rel: 'alternate', hreflang: 'x-default', href: `https://marcelosoiber.dev${pageRoute('pt', currentPage.value)}` },
+    {
+      rel: 'alternate',
+      hreflang: 'pt-BR',
+      href: `https://marcelosoiber.dev${pageRoute('pt', currentPage.value)}`,
+    },
+    {
+      rel: 'alternate',
+      hreflang: 'en',
+      href: `https://marcelosoiber.dev${pageRoute('en', currentPage.value)}`,
+    },
+    {
+      rel: 'alternate',
+      hreflang: 'es',
+      href: `https://marcelosoiber.dev${pageRoute('es', currentPage.value)}`,
+    },
+    {
+      rel: 'alternate',
+      hreflang: 'x-default',
+      href: `https://marcelosoiber.dev${pageRoute('pt', currentPage.value)}`,
+    },
   ],
   script: [
     {
@@ -68,10 +86,7 @@ useHead(() => ({
         name: 'Marcelo Soiber',
         url: canonical.value,
         jobTitle: jobTitles[locale.value],
-        sameAs: [
-          'https://github.com/MarceloSoiber',
-          'https://www.linkedin.com/in/marcelo-soiber-6a87644a/',
-        ],
+        sameAs: ['https://github.com/MarceloSoiber', 'https://www.linkedin.com/in/marcelo-soiber-6a87644a/'],
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Tubarão',
@@ -124,13 +139,22 @@ function closeContactOnBackdrop(event: MouseEvent) {
   if (event.target === contactDialog.value) closeContact()
 }
 
+function openProjectDetails(project: Project) {
+  selectedProject.value = project
+}
+
+function closeProjectDetails() {
+  selectedProject.value = null
+}
+
 onMounted(() => {
   initializeReveals()
 
   if (window.location.hash === '#contato') openContact()
 })
 
-watch(currentPage, async () => {
+watch([currentPage, locale], async () => {
+  closeProjectDetails()
   await nextTick()
   initializeReveals()
 })
@@ -255,7 +279,9 @@ onBeforeUnmount(() => {
 
         <div class="projects__list">
           <ProjectCaseStudy
-            v-for="(project, index) in currentPage === 'home' ? content.projects.items.slice(0, 1) : content.projects.items"
+            v-for="(project, index) in currentPage === 'home'
+              ? content.projects.items.slice(0, 1)
+              : content.projects.items"
             :key="project.id"
             :project="project"
             :position="index"
@@ -263,19 +289,22 @@ onBeforeUnmount(() => {
             :challenge-label="content.projects.challengeLabel"
             :decision-label="content.projects.decisionLabel"
             :result-label="content.projects.resultLabel"
+            :case-study-label="content.projects.details.caseStudy"
+            :details-label="content.projects.details.open"
+            @open-details="openProjectDetails"
           />
         </div>
 
-        <RouterLink
-          v-if="currentPage === 'home'"
-          class="section-more"
-          :to="pageRoute(locale, 'projects')"
-        >
+        <RouterLink v-if="currentPage === 'home'" class="section-more" :to="pageRoute(locale, 'projects')">
           {{ content.hero.primaryCta }} <span aria-hidden="true">→</span>
         </RouterLink>
       </section>
 
-      <section v-if="currentPage === 'experience'" id="experiencia" class="experience section-shell page-section">
+      <section
+        v-if="currentPage === 'experience'"
+        id="experiencia"
+        class="experience section-shell page-section"
+      >
         <SectionHeader :eyebrow="content.experience.eyebrow" :title="content.experience.title" />
 
         <ol class="timeline">
@@ -332,6 +361,13 @@ onBeforeUnmount(() => {
       <p>{{ content.footer }}</p>
       <a href="#top">TOP ↑</a>
     </footer>
+
+    <ProjectDetailsModal
+      :project="selectedProject"
+      :labels="content.projects.details"
+      :repository-label="content.projects.repositoryLabel"
+      @close="closeProjectDetails"
+    />
 
     <dialog
       id="contato"

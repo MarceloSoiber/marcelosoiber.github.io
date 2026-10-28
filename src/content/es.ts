@@ -36,8 +36,7 @@ export const es: SiteContent = {
     eyebrow: '01 // PERFIL DE MISIÓN',
     title: 'Ingeniería guiada por decisiones, no por modas.',
     lead: 'Mi especialidad está en la intersección entre arquitectura, producto y ejecución.',
-    body:
-      'Trabajo hace más de nueve años en desarrollo de software, incluyendo tecnología para pagos. Construyo con Python, PHP y TypeScript, conectando APIs, datos, aplicaciones web e inteligencia artificial con atención a la privacidad, la operación y los resultados del negocio.',
+    body: 'Trabajo hace más de nueve años en desarrollo de software, incluyendo tecnología para pagos. Construyo con Python, PHP y TypeScript, conectando APIs, datos, aplicaciones web e inteligencia artificial con atención a la privacidad, la operación y los resultados del negocio.',
     metrics: [
       { value: '9+', label: 'años de ingeniería' },
       { value: '04', label: 'sistemas destacados' },
@@ -79,6 +78,21 @@ export const es: SiteContent = {
     challengeLabel: 'Desafío',
     decisionLabel: 'Decisión',
     resultLabel: 'Resultado',
+    details: {
+      caseStudy: 'ESTUDIO DE CASO',
+      open: 'Ver proyecto completo',
+      close: 'Cerrar detalles del proyecto',
+      status: 'Estado',
+      period: 'Período',
+      role: 'Rol',
+      overview: 'Visión general',
+      features: 'Funciones principales',
+      architecture: 'Arquitectura',
+      tradeoffs: 'Decisiones y compromisos',
+      outcomes: 'Resultados',
+      nextSteps: 'Próximos pasos',
+      technologies: 'Tecnologías',
+    },
     items: [
       {
         id: 'adr-forge',
@@ -98,6 +112,40 @@ export const es: SiteContent = {
         image: '/images/adr-forge.png',
         imageAlt: 'Interfaz de ADR Forge mostrando un laboratorio de decisiones arquitectónicas',
         accent: 'cyan',
+        details: {
+          status: 'Laboratorio funcional',
+          period: '2026 · En evolución',
+          role: 'Arquitectura, producto e implementación full stack',
+          overview: [
+            'ADR Forge convierte una pregunta arquitectónica en un experimento reproducible: conserva el contexto, ejecuta distintas estrategias de IA y produce registros de decisión estructurados.',
+            'El sistema mantiene la recomendación automatizada separada de la decisión humana y preserva la procedencia necesaria para revisar cada resultado.',
+          ],
+          features: [
+            'Creación de proyectos, problemas arquitectónicos y revisiones inmutables.',
+            'Ejecuciones en tiempo real con eventos de progreso y snapshots del contexto utilizado.',
+            'Comparación ciega entre prompting, RAG y modelos ajustados, con evaluación humana.',
+            'Validación determinista del contrato ADR antes de almacenar un resultado.',
+          ],
+          architecture: [
+            'Monolito modular con API FastAPI, interfaz React/TypeScript y persistencia local en SQLite.',
+            'Pipeline de experimentación aislado por adaptadores para cambiar proveedores, modelos y estrategias de recuperación.',
+            'Entidades versionadas conectan entrada, configuración, fuentes, salida y evaluación en una cadena auditable.',
+          ],
+          tradeoffs: [
+            'SQLite y la ejecución local reducen la complejidad operativa y favorecen la reproducibilidad, a cambio de una escalabilidad horizontal limitada.',
+            'El contrato estructurado restringe la libertad del modelo, pero facilita validación, comparación y consumo seguro.',
+            'Las revisiones inmutables requieren más almacenamiento, pero evitan que cambios posteriores alteren experimentos anteriores.',
+          ],
+          outcomes: [
+            'Flujo único para diseñar, ejecutar y evaluar experimentos arquitectónicos con IA.',
+            'Resultados comparables y auditables sin delegar la decisión final al modelo.',
+            'Base preparada para ampliar conjuntos de evaluación y modelos sin acoplar el dominio a un proveedor.',
+          ],
+          nextSteps: [
+            'Ampliar el conjunto de casos de referencia y las métricas de evaluación.',
+            'Incorporar exportación y colaboración sobre ADRs manteniendo el enfoque local-first.',
+          ],
+        },
       },
       {
         id: 'knowledge-hub',
@@ -117,6 +165,40 @@ export const es: SiteContent = {
         image: '/images/knowledge-hub-architecture.svg',
         imageAlt: 'Diagrama abstracto de la arquitectura de Knowledge Hub',
         accent: 'cyan',
+        details: {
+          status: 'Sistema funcional',
+          period: '2025—2026 · En evolución',
+          role: 'Arquitectura e implementación end-to-end',
+          overview: [
+            'Knowledge Hub centraliza documentos y notas en una base de conocimiento privada que puede explorarse por significado, no solo por palabras exactas.',
+            'Además de la experiencia web, expone capacidades controladas mediante MCP para que agentes consulten el mismo conocimiento con fuentes verificables.',
+          ],
+          features: [
+            'Ingestión, segmentación y enriquecimiento de documentos con seguimiento de su procedencia.',
+            'Búsqueda híbrida y preguntas con respuestas fundamentadas en fragmentos recuperados.',
+            'Gestión de colecciones y navegación por fuentes desde una interfaz Angular.',
+            'Herramientas MCP con límites explícitos para búsquedas y lecturas realizadas por agentes.',
+          ],
+          architecture: [
+            'Frontend Angular conectado a una API FastAPI que concentra casos de uso, autorización e ingestión.',
+            'PostgreSQL almacena metadatos y pgvector mantiene embeddings consultables por similitud semántica.',
+            'Workers procesan documentos fuera del ciclo HTTP, mientras modelos locales preservan privacidad y control de costos.',
+          ],
+          tradeoffs: [
+            'La inferencia local protege datos y evita dependencia de un proveedor, pero exige administrar recursos y modelos.',
+            'El procesamiento asíncrono mejora la respuesta de la API, aunque introduce estados intermedios y reintentos que deben observarse.',
+            'La segmentación configurable aumenta la calidad en fuentes diversas a cambio de más parámetros para calibrar.',
+          ],
+          outcomes: [
+            'Conocimiento disperso convertido en una base única, consultable y rastreable.',
+            'Respuestas acompañadas de evidencia para que el usuario pueda verificar el contexto recuperado.',
+            'La misma capa de conocimiento atiende a personas y agentes sin exponer directamente la persistencia.',
+          ],
+          nextSteps: [
+            'Medir recuperación y fidelidad con un conjunto de preguntas de referencia.',
+            'Añadir políticas de acceso por colección y observabilidad detallada del pipeline de ingestión.',
+          ],
+        },
       },
       {
         id: 'fraud-detection',
@@ -136,6 +218,40 @@ export const es: SiteContent = {
         image: '/images/fraud-detection.svg',
         imageAlt: 'Visualización abstracta de análisis de transacciones y detección de anomalías',
         accent: 'amber',
+        details: {
+          status: 'Prototipo de investigación',
+          period: '2025—2026',
+          role: 'Modelado, arquitectura e implementación',
+          overview: [
+            'El proyecto investiga cómo detectar patrones de fraude en secuencias de transacciones y presentar las señales de forma útil para un analista.',
+            'Su objetivo no es aprobar o bloquear operaciones automáticamente, sino combinar puntuaciones, explicaciones y contexto para apoyar decisiones humanas.',
+          ],
+          features: [
+            'Ingestión y preparación de secuencias de transacciones para entrenamiento y análisis.',
+            'Puntuación de riesgo basada en comportamiento temporal y señales derivadas.',
+            'Explicaciones de las variables y eventos que más influyeron en cada alerta.',
+            'Flujo de agentes para resumir evidencia y organizar la revisión del analista.',
+          ],
+          architecture: [
+            'API FastAPI separa la inferencia, la explicación y la consulta de casos.',
+            'PyTorch y scikit-learn implementan experimentos reproducibles; PostgreSQL conserva transacciones, predicciones y revisiones.',
+            'LangGraph coordina pasos generativos con estado explícito sin colocarlos en la ruta crítica del modelo de riesgo.',
+          ],
+          tradeoffs: [
+            'Los modelos secuenciales capturan comportamiento temporal, pero son más costosos de explicar que modelos tabulares simples.',
+            'La IA generativa mejora la lectura del caso, aunque sus textos deben permanecer vinculados a evidencia estructurada.',
+            'Priorizar sensibilidad ayuda a encontrar más riesgos, pero aumenta falsos positivos y carga de revisión.',
+          ],
+          outcomes: [
+            'Entorno integrado para comparar señales predictivas, explicaciones y análisis asistido.',
+            'Separación explícita entre la puntuación del modelo y la decisión operacional.',
+            'Trazabilidad de datos, versión del modelo y evidencia presentada en cada caso.',
+          ],
+          nextSteps: [
+            'Calibrar umbrales con costos de falsos positivos y falsos negativos.',
+            'Incorporar monitoreo de drift y pruebas con analistas para evaluar la utilidad de las explicaciones.',
+          ],
+        },
       },
       {
         id: 'knights-tour',
@@ -155,6 +271,40 @@ export const es: SiteContent = {
         image: '/images/knights-tour.svg',
         imageAlt: 'Tablero técnico con el recorrido del caballo y telemetría del algoritmo',
         accent: 'cyan',
+        details: {
+          status: 'Aplicación funcional',
+          period: '2025',
+          role: 'Diseño del algoritmo e implementación full stack',
+          overview: [
+            'Knight’s Tour hace visible la dinámica de un algoritmo genético mientras busca un recorrido que visite las 64 casillas del tablero una sola vez.',
+            'La aplicación trata cada búsqueda como un job observable y permite acompañar generaciones, diversidad y estancamiento sin bloquear la interfaz.',
+          ],
+          features: [
+            'Configuración y ejecución de búsquedas independientes con parámetros evolutivos.',
+            'Visualización del mejor recorrido y de su evolución generación a generación.',
+            'Telemetría en tiempo real mediante SSE, con progreso, fitness y diversidad.',
+            'Detección de estancamiento y mutaciones adaptativas orientadas por la heurística de Warnsdorff.',
+          ],
+          architecture: [
+            'Backend Node.js administra el ciclo de vida de los jobs y ejecuta el motor genético fuera de las solicitudes largas.',
+            'SSE entrega eventos unidireccionales con reconexión sencilla y menor complejidad que una conexión bidireccional.',
+            'SQLite persiste configuraciones, estado y resultados para recuperar experimentos y comparar ejecuciones.',
+          ],
+          tradeoffs: [
+            'SSE se ajusta al flujo servidor-cliente, pero no resuelve interacción bidireccional como WebSocket.',
+            'La heurística acelera la búsqueda y reduce rutas inviables, aunque introduce conocimiento específico del problema.',
+            'Mantener poblaciones diversas consume más cómputo, pero reduce la convergencia prematura.',
+          ],
+          outcomes: [
+            'Proceso combinatorio convertido en una experiencia visual, observable y reproducible.',
+            'Separación entre motor de optimización, gestión de jobs, persistencia y presentación.',
+            'Telemetría que permite entender por qué una ejecución converge o queda estancada.',
+          ],
+          nextSteps: [
+            'Comparar operadores genéticos y estrategias de reinicio con semillas reproducibles.',
+            'Añadir exportación de experimentos y visualizaciones comparativas entre ejecuciones.',
+          ],
+        },
       },
     ],
   },
@@ -188,7 +338,8 @@ export const es: SiteContent = {
         period: '2012—2013',
         title: '3.er lugar en maratones de programación',
         organization: 'Competiciones académicas',
-        description: 'Reconocimiento por razonamiento algorítmico y resolución de problemas bajo presión de tiempo.',
+        description:
+          'Reconocimiento por razonamiento algorítmico y resolución de problemas bajo presión de tiempo.',
       },
     ],
   },

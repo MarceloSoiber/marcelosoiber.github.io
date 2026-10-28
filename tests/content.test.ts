@@ -21,7 +21,24 @@ describe('localized portfolio content', () => {
       for (const project of content.projects.items) {
         expect(project.repository).toMatch(/^https:\/\/github\.com\/MarceloSoiber\//)
         expect(project.image).toMatch(/^\/images\/.+\.(svg|png)$/)
+        expect(project.details.status.trim()).not.toBe('')
+        expect(project.details.period.trim()).not.toBe('')
+        expect(project.details.role.trim()).not.toBe('')
+
+        for (const section of [
+          project.details.overview,
+          project.details.features,
+          project.details.architecture,
+          project.details.tradeoffs,
+          project.details.outcomes,
+          project.details.nextSteps,
+        ]) {
+          expect(section.length).toBeGreaterThan(0)
+          expect(section.every((item) => item.trim().length > 0)).toBe(true)
+        }
       }
+
+      expect(Object.values(content.projects.details).every((label) => label.trim().length > 0)).toBe(true)
     }
   })
 
@@ -30,12 +47,7 @@ describe('localized portfolio content', () => {
 
     for (const content of Object.values(contentByLocale)) {
       expect(content.nav).toHaveLength(baseline.nav.length)
-      expect(content.nav.map((item) => item.page)).toEqual([
-        'profile',
-        'projects',
-        'experience',
-        'contact',
-      ])
+      expect(content.nav.map((item) => item.page)).toEqual(['profile', 'projects', 'experience', 'contact'])
       expect(content.capabilities.items).toHaveLength(baseline.capabilities.items.length)
       expect(content.experience.items).toHaveLength(baseline.experience.items.length)
       expect(content.notes.items).toHaveLength(baseline.notes.items.length)

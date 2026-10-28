@@ -20,6 +20,35 @@ export interface Project {
   image: string
   imageAlt: string
   accent: 'cyan' | 'amber'
+  details: ProjectDetails
+}
+
+export interface ProjectDetails {
+  status: string
+  period: string
+  role: string
+  overview: string[]
+  features: string[]
+  architecture: string[]
+  tradeoffs: string[]
+  outcomes: string[]
+  nextSteps: string[]
+}
+
+export interface ProjectDetailLabels {
+  caseStudy: string
+  open: string
+  close: string
+  status: string
+  period: string
+  role: string
+  overview: string
+  features: string
+  architecture: string
+  tradeoffs: string
+  outcomes: string
+  nextSteps: string
+  technologies: string
 }
 
 export interface Capability {
@@ -90,6 +119,7 @@ export interface SiteContent {
     challengeLabel: string
     decisionLabel: string
     resultLabel: string
+    details: ProjectDetailLabels
     items: Project[]
   }
   experience: {

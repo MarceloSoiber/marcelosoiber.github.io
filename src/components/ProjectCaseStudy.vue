@@ -8,6 +8,12 @@ defineProps<{
   challengeLabel: string
   decisionLabel: string
   resultLabel: string
+  caseStudyLabel: string
+  detailsLabel: string
+}>()
+
+const emit = defineEmits<{
+  openDetails: [project: Project]
 }>()
 </script>
 
@@ -20,7 +26,7 @@ defineProps<{
     <div class="project__visual">
       <div class="project__visual-head">
         <span>{{ project.index }}</span>
-        <span>LIVE CASE STUDY</span>
+        <span>{{ caseStudyLabel }}</span>
       </div>
       <img :src="project.image" :alt="project.imageAlt" width="800" height="520" loading="lazy" />
       <div class="project__visual-grid" aria-hidden="true"></div>
@@ -50,12 +56,18 @@ defineProps<{
         <li v-for="technology in project.technologies" :key="technology">{{ technology }}</li>
       </ul>
 
-      <a class="project__link" :href="project.repository" target="_blank" rel="noopener noreferrer">
-        {{ repositoryLabel }}
-        <svg aria-hidden="true" viewBox="0 0 20 20">
-          <path d="M4 10h11M10.5 5.5 15 10l-4.5 4.5" />
-        </svg>
-      </a>
+      <div class="project__actions">
+        <button class="project__details" type="button" @click="emit('openDetails', project)">
+          {{ detailsLabel }}
+          <span aria-hidden="true">↘</span>
+        </button>
+        <a class="project__link" :href="project.repository" target="_blank" rel="noopener noreferrer">
+          {{ repositoryLabel }}
+          <svg aria-hidden="true" viewBox="0 0 20 20">
+            <path d="M4 10h11M10.5 5.5 15 10l-4.5 4.5" />
+          </svg>
+        </a>
+      </div>
     </div>
   </article>
 </template>
