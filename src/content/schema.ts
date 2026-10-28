@@ -58,12 +58,23 @@ export interface Capability {
   technologies: string[]
 }
 
-export interface TimelineItem {
+export interface CareerItem {
   period: string
   title: string
   organization: string
+  location: string
   description: string
+  contributions: string[]
+  technologies: string[]
   current?: boolean
+}
+
+export interface BackgroundItem {
+  period: string
+  kind: 'education' | 'recognition'
+  title: string
+  organization: string
+  description: string
 }
 
 export interface Note {
@@ -125,7 +136,16 @@ export interface SiteContent {
   experience: {
     eyebrow: string
     title: string
-    items: TimelineItem[]
+    description: string
+    professionalCode: string
+    professionalTitle: string
+    backgroundCode: string
+    backgroundTitle: string
+    contributionsLabel: string
+    technologiesLabel: string
+    kindLabels: Record<BackgroundItem['kind'], string>
+    items: CareerItem[]
+    background: BackgroundItem[]
   }
   notes: {
     eyebrow: string

@@ -25,7 +25,7 @@ export const pt: SiteContent = {
     titleLead: 'Construo sistemas que transformam',
     titleFocus: 'complexidade em clareza.',
     description:
-      'Engenheiro de Software especializado em arquitetura, sistemas inteligentes e IA aplicada. Mais de nove anos convertendo problemas reais em software confiável.',
+      'Engenheiro de Software especializado em arquitetura, sistemas inteligentes e IA aplicada. Mais de dez anos convertendo problemas reais em software confiável.',
     primaryCta: 'Explorar sistemas',
     secondaryCta: 'Baixar currículo',
     telemetryLabel: 'Núcleo profissional',
@@ -36,9 +36,9 @@ export const pt: SiteContent = {
     eyebrow: '01 // PERFIL DE MISSÃO',
     title: 'Engenharia orientada a decisões, não a modismos.',
     lead: 'Minha especialidade está na interseção entre arquitetura, produto e execução.',
-    body: 'Atuo há mais de nove anos no desenvolvimento de software, incluindo soluções para meios de pagamentos. Trabalho com Python, PHP e TypeScript, conectando APIs, dados, aplicações web e inteligência artificial com atenção a privacidade, operação e resultado de negócio.',
+    body: 'Atuo há mais de dez anos no desenvolvimento de software, incluindo soluções para meios de pagamentos. Trabalho com Python, PHP e TypeScript, conectando APIs, dados, aplicações web e inteligência artificial com atenção a privacidade, operação e resultado de negócio.',
     metrics: [
-      { value: '9+', label: 'anos de engenharia' },
+      { value: '10+', label: 'anos de engenharia' },
       { value: '04', label: 'sistemas em destaque' },
       { value: 'PT·EN·ES', label: 'presença internacional' },
     ],
@@ -318,36 +318,86 @@ export const pt: SiteContent = {
   },
   experience: {
     eyebrow: '04 // LINHA DE EXPERIÊNCIA',
-    title: 'Conhecimento construído entre software e problemas reais.',
+    title: 'Uma trajetória de software, modernização e problemas reais.',
+    description:
+      'Mais de 10 anos evoluindo de fundamentos full stack para sistemas de pagamentos, arquitetura e IA aplicada.',
+    professionalCode: '01 // TRAJETORIA.LOG',
+    professionalTitle: 'Trajetória profissional',
+    backgroundCode: '02 // FORMACAO.INDEX',
+    backgroundTitle: 'Formação & reconhecimentos',
+    contributionsLabel: 'Contribuições selecionadas',
+    technologiesLabel: 'Tecnologias e contextos',
+    kindLabels: {
+      education: 'Formação',
+      recognition: 'Reconhecimento',
+    },
     items: [
       {
-        period: 'ATUAL',
-        title: 'Engenharia de Software',
+        period: 'DEZ. 2018 — ATUAL',
+        title: 'Desenvolvedor Sênior',
         organization: 'gsurf · Tecnologia para meios de pagamentos',
+        location: 'Santa Catarina, Brasil · Remoto',
         description:
-          'Desenvolvimento de software no contexto de pagamentos, unindo conhecimento técnico, confiabilidade e resolução de problemas de negócio.',
+          'Atuação em sistemas críticos de pagamentos, conectando decisões de arquitetura, confiabilidade operacional e necessidades de produto.',
+        contributions: [
+          'Liderança técnica na modernização de monólitos PHP e Laravel para microsserviços Python na AWS.',
+          'Projeto e manutenção de APIs de pagamentos com foco em segurança, resiliência, baixa latência e continuidade operacional.',
+          'Otimização de bancos relacionais, automação com CloudFormation e colaboração próxima com produto.',
+        ],
+        technologies: ['Python', 'PHP / Laravel', 'AWS', 'CloudFormation', 'APIs', 'SQL'],
         current: true,
       },
       {
-        period: '2026—2027',
+        period: 'FEV. 2016 — DEZ. 2018',
+        title: 'Desenvolvedor Web PHP',
+        organization: 'Eprocessos',
+        location: 'Garopaba, Santa Catarina, Brasil',
+        description: 'Desenvolvimento full stack e suporte a aplicações web voltadas a processos de negócio.',
+        contributions: [
+          'Desenvolvimento e manutenção de frontend e backend em aplicações PHP.',
+          'Projeto e evolução de estruturas de dados em MySQL.',
+          'Análise de requisitos, suporte técnico e resolução de incidentes para aplicações e usuários.',
+        ],
+        technologies: ['PHP', 'MySQL', 'Frontend', 'Suporte técnico'],
+      },
+    ],
+    background: [
+      {
+        period: '2026 — 2027',
+        kind: 'education',
         title: 'Engenharia de Software com IA Aplicada',
-        organization: 'UNIPDS · Pós-graduação',
+        organization: 'UNIPDS · Pós-graduação em andamento',
         description:
           'Aprofundamento em arquitetura, inteligência artificial e aplicação prática de sistemas inteligentes.',
       },
       {
         period: '2015',
+        kind: 'education',
         title: 'Ciência da Computação',
-        organization: 'Universidade do Sul de Santa Catarina',
+        organization: 'Universidade do Sul de Santa Catarina · Unisul',
         description:
-          'Formação concluída com um sistema de identificação taxonômica baseado em chaves dicotômicas.',
+          'Trabalho final apresentado com um sistema de identificação taxonômica baseado em chaves dicotômicas.',
       },
       {
-        period: '2012—2013',
-        title: '3º lugar em Maratona de Programação',
+        period: '2009 — 2011',
+        kind: 'education',
+        title: 'Técnico em Programação — Informática',
+        organization: 'CEDUP',
+        description: 'Formação técnica que estabeleceu a base para o desenvolvimento de software.',
+      },
+      {
+        period: '2012 · 2013',
+        kind: 'recognition',
+        title: '3º lugar na Maratona de Programação',
         organization: 'Competições acadêmicas',
-        description:
-          'Reconhecimento por raciocínio algorítmico e resolução de problemas sob restrição de tempo.',
+        description: 'Reconhecimento por raciocínio algorítmico e resolução de problemas sob pressão.',
+      },
+      {
+        period: '2011 · 2013',
+        kind: 'recognition',
+        title: 'Unisul Tech Day',
+        organization: 'Universidade do Sul de Santa Catarina',
+        description: 'Participação nas edições de 2011 e 2013 do evento de tecnologia.',
       },
     ],
   },
@@ -386,7 +436,7 @@ export const pt: SiteContent = {
       'Tenho interesse especial em arquitetura, IA aplicada e modernização de sistemas — principalmente quando existe um desafio técnico difícil e impacto real para o negócio.',
     ],
     highlights: [
-      { value: '9+', label: 'anos construindo software' },
+      { value: '10+', label: 'anos construindo software' },
       { value: 'ARCH · PROD · EXEC', label: 'visão de ponta a ponta' },
       { value: 'PT · EN · ES', label: 'comunicação' },
     ],

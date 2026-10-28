@@ -305,7 +305,16 @@ onBeforeUnmount(() => {
         id="experiencia"
         class="experience section-shell page-section"
       >
-        <SectionHeader :eyebrow="content.experience.eyebrow" :title="content.experience.title" />
+        <SectionHeader
+          :eyebrow="content.experience.eyebrow"
+          :title="content.experience.title"
+          :description="content.experience.description"
+        />
+
+        <div class="experience__section-heading reveal">
+          <span>{{ content.experience.professionalCode }}</span>
+          <h3>{{ content.experience.professionalTitle }}</h3>
+        </div>
 
         <ol class="timeline">
           <li
@@ -313,19 +322,63 @@ onBeforeUnmount(() => {
             :key="`${item.period}-${item.title}`"
             class="timeline__item reveal"
             :class="{ 'is-current': item.current }"
-            :style="{ '--delay': `${index * 60}ms` }"
+            :style="{ '--delay': `${index * 80}ms` }"
           >
             <div class="timeline__marker" aria-hidden="true">
               <span></span>
             </div>
             <time>{{ item.period }}</time>
-            <div>
-              <h3>{{ item.title }}</h3>
-              <p class="timeline__organization">{{ item.organization }}</p>
-              <p>{{ item.description }}</p>
-            </div>
+            <article class="timeline__panel">
+              <div class="timeline__header">
+                <div>
+                  <h4>{{ item.title }}</h4>
+                  <p class="timeline__organization">{{ item.organization }}</p>
+                </div>
+                <p class="timeline__location">{{ item.location }}</p>
+              </div>
+
+              <p class="timeline__description">{{ item.description }}</p>
+
+              <div class="timeline__evidence">
+                <p>{{ content.experience.contributionsLabel }}</p>
+                <ul>
+                  <li v-for="contribution in item.contributions" :key="contribution">
+                    {{ contribution }}
+                  </li>
+                </ul>
+              </div>
+
+              <ul class="timeline__technologies" :aria-label="content.experience.technologiesLabel">
+                <li v-for="technology in item.technologies" :key="technology">
+                  {{ technology }}
+                </li>
+              </ul>
+            </article>
           </li>
         </ol>
+
+        <div class="experience__section-heading experience__section-heading--background reveal">
+          <span>{{ content.experience.backgroundCode }}</span>
+          <h3>{{ content.experience.backgroundTitle }}</h3>
+        </div>
+
+        <div class="background-grid">
+          <article
+            v-for="(item, index) in content.experience.background"
+            :key="`${item.period}-${item.title}`"
+            class="background-card reveal"
+            :class="`background-card--${item.kind}`"
+            :style="{ '--delay': `${index * 60}ms` }"
+          >
+            <div class="background-card__meta">
+              <span>{{ content.experience.kindLabels[item.kind] }}</span>
+              <time>{{ item.period }}</time>
+            </div>
+            <h4>{{ item.title }}</h4>
+            <p class="background-card__organization">{{ item.organization }}</p>
+            <p>{{ item.description }}</p>
+          </article>
+        </div>
       </section>
 
       <section v-if="currentPage === 'projects'" class="notes section-shell">

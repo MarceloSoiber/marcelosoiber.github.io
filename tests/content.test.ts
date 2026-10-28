@@ -50,6 +50,20 @@ describe('localized portfolio content', () => {
       expect(content.nav.map((item) => item.page)).toEqual(['profile', 'projects', 'experience', 'contact'])
       expect(content.capabilities.items).toHaveLength(baseline.capabilities.items.length)
       expect(content.experience.items).toHaveLength(baseline.experience.items.length)
+      expect(content.experience.background).toHaveLength(baseline.experience.background.length)
+      for (const item of content.experience.items) {
+        expect(item.contributions.length).toBeGreaterThan(0)
+        expect(item.contributions.every((contribution) => contribution.trim().length > 0)).toBe(true)
+        expect(item.technologies.length).toBeGreaterThan(0)
+      }
+      expect(
+        content.experience.background.every(
+          (item) =>
+            item.title.trim().length > 0 &&
+            item.organization.trim().length > 0 &&
+            item.description.trim().length > 0,
+        ),
+      ).toBe(true)
       expect(content.notes.items).toHaveLength(baseline.notes.items.length)
       expect(content.contact.about).toHaveLength(baseline.contact.about.length)
       expect(content.contact.about.every((paragraph) => paragraph.trim().length > 0)).toBe(true)

@@ -25,7 +25,7 @@ export const en: SiteContent = {
     titleLead: 'I build systems that turn',
     titleFocus: 'complexity into clarity.',
     description:
-      'Software Engineer specializing in architecture, intelligent systems, and applied AI. Over nine years turning real problems into reliable software.',
+      'Software Engineer specializing in architecture, intelligent systems, and applied AI. Over ten years turning real problems into reliable software.',
     primaryCta: 'Explore systems',
     secondaryCta: 'Download CV',
     telemetryLabel: 'Professional core',
@@ -36,9 +36,9 @@ export const en: SiteContent = {
     eyebrow: '01 // MISSION PROFILE',
     title: 'Engineering driven by decisions, not trends.',
     lead: 'My specialty lives at the intersection of architecture, product, and execution.',
-    body: 'I have worked in software development for over nine years, including payment technology. I build with Python, PHP, and TypeScript, connecting APIs, data, web applications, and artificial intelligence with a focus on privacy, operations, and business outcomes.',
+    body: 'I have worked in software development for over ten years, including payment technology. I build with Python, PHP, and TypeScript, connecting APIs, data, web applications, and artificial intelligence with a focus on privacy, operations, and business outcomes.',
     metrics: [
-      { value: '9+', label: 'years in engineering' },
+      { value: '10+', label: 'years in engineering' },
       { value: '04', label: 'featured systems' },
       { value: 'PT·EN·ES', label: 'international presence' },
     ],
@@ -313,34 +313,88 @@ export const en: SiteContent = {
   },
   experience: {
     eyebrow: '04 // EXPERIENCE LINE',
-    title: 'Knowledge built between software and real-world problems.',
+    title: 'A journey through software, modernization, and real-world problems.',
+    description:
+      'Over 10 years progressing from full-stack foundations to payment systems, architecture, and applied AI.',
+    professionalCode: '01 // CAREER.LOG',
+    professionalTitle: 'Professional journey',
+    backgroundCode: '02 // BACKGROUND.INDEX',
+    backgroundTitle: 'Education & recognition',
+    contributionsLabel: 'Selected contributions',
+    technologiesLabel: 'Technologies and contexts',
+    kindLabels: {
+      education: 'Education',
+      recognition: 'Recognition',
+    },
     items: [
       {
-        period: 'NOW',
-        title: 'Software Engineering',
+        period: 'DEC 2018 — PRESENT',
+        title: 'Senior Software Developer',
         organization: 'gsurf · Payment technology',
+        location: 'Santa Catarina, Brazil · Remote',
         description:
-          'Software development in the payments domain, combining technical knowledge, reliability, and business problem-solving.',
+          'Work on critical payment systems, connecting architecture decisions, operational reliability, and product needs.',
+        contributions: [
+          'Technical leadership in modernizing PHP and Laravel monoliths into Python microservices on AWS.',
+          'Design and maintenance of payment APIs focused on security, resilience, low latency, and operational continuity.',
+          'Relational database optimization, CloudFormation automation, and close collaboration with product stakeholders.',
+        ],
+        technologies: ['Python', 'PHP / Laravel', 'AWS', 'CloudFormation', 'APIs', 'SQL'],
         current: true,
       },
       {
-        period: '2026—2027',
-        title: 'Software Engineering with Applied AI',
-        organization: 'UNIPDS · Postgraduate program',
+        period: 'FEB 2016 — DEC 2018',
+        title: 'PHP Web Developer',
+        organization: 'Eprocessos',
+        location: 'Garopaba, Santa Catarina, Brazil',
         description:
-          'Advanced study in architecture, artificial intelligence, and practical intelligent systems.',
+          'Full-stack development and support for web applications built around business processes.',
+        contributions: [
+          'Frontend and backend development and maintenance for PHP web applications.',
+          'Design and evolution of MySQL data structures.',
+          'Requirements analysis, technical support, and incident resolution for applications and users.',
+        ],
+        technologies: ['PHP', 'MySQL', 'Frontend', 'Technical support'],
+      },
+    ],
+    background: [
+      {
+        period: '2026 — 2027',
+        kind: 'education',
+        title: 'Software Engineering with Applied AI',
+        organization: 'UNIPDS · Postgraduate program in progress',
+        description:
+          'Advanced study in architecture, artificial intelligence, and the practical application of intelligent systems.',
       },
       {
         period: '2015',
-        title: 'Computer Science',
-        organization: 'University of Southern Santa Catarina',
-        description: 'Degree completed with a taxonomic identification system based on dichotomous keys.',
+        kind: 'education',
+        title: "Bachelor's Degree in Computer Science",
+        organization: 'Universidade do Sul de Santa Catarina · Unisul',
+        description:
+          'Final project presented with a taxonomic identification system based on dichotomous keys.',
       },
       {
-        period: '2012—2013',
-        title: '3rd place in programming contests',
+        period: '2009 — 2011',
+        kind: 'education',
+        title: 'Technical Diploma in Computer Programming',
+        organization: 'CEDUP',
+        description:
+          'Technical education that established the foundation for a career in software development.',
+      },
+      {
+        period: '2012 · 2013',
+        kind: 'recognition',
+        title: '3rd place in the Programming Marathon',
         organization: 'Academic competitions',
-        description: 'Recognition for algorithmic reasoning and problem-solving under time constraints.',
+        description: 'Recognition for algorithmic reasoning and problem-solving under pressure.',
+      },
+      {
+        period: '2011 · 2013',
+        kind: 'recognition',
+        title: 'Unisul Tech Day',
+        organization: 'Universidade do Sul de Santa Catarina',
+        description: 'Participation in the 2011 and 2013 editions of the technology event.',
       },
     ],
   },
@@ -379,7 +433,7 @@ export const en: SiteContent = {
       'I am especially interested in architecture, applied AI, and systems modernization — particularly when there is a difficult technical challenge with real business impact.',
     ],
     highlights: [
-      { value: '9+', label: 'years building software' },
+      { value: '10+', label: 'years building software' },
       { value: 'ARCH · PROD · EXEC', label: 'end-to-end perspective' },
       { value: 'PT · EN · ES', label: 'communication' },
     ],
