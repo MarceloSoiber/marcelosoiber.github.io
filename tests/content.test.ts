@@ -51,6 +51,14 @@ describe('localized portfolio content', () => {
       expect(content.capabilities.items).toHaveLength(baseline.capabilities.items.length)
       expect(content.experience.items).toHaveLength(baseline.experience.items.length)
       expect(content.notes.items).toHaveLength(baseline.notes.items.length)
+      expect(content.contact.about).toHaveLength(baseline.contact.about.length)
+      expect(content.contact.about.every((paragraph) => paragraph.trim().length > 0)).toBe(true)
+      expect(content.contact.highlights).toHaveLength(baseline.contact.highlights.length)
+      expect(
+        content.contact.highlights.every(
+          (highlight) => highlight.value.trim().length > 0 && highlight.label.trim().length > 0,
+        ),
+      ).toBe(true)
       expect(content.meta.title.length).toBeGreaterThan(20)
       expect(content.meta.description.length).toBeGreaterThan(70)
     }

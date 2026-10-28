@@ -381,6 +381,15 @@ export const pt: SiteContent = {
     title: 'Vamos conversar sobre sistemas que valem a pena construir.',
     description:
       'Arquitetura, IA aplicada, engenharia de software ou uma boa pergunta técnica: o canal está aberto.',
+    about: [
+      'Gosto de transformar problemas ambíguos em decisões claras e software sustentável. Trabalho próximo ao produto e à operação, fazendo as perguntas certas antes de escolher ferramentas.',
+      'Tenho interesse especial em arquitetura, IA aplicada e modernização de sistemas — principalmente quando existe um desafio técnico difícil e impacto real para o negócio.',
+    ],
+    highlights: [
+      { value: '9+', label: 'anos construindo software' },
+      { value: 'ARCH · PROD · EXEC', label: 'visão de ponta a ponta' },
+      { value: 'PT · EN · ES', label: 'comunicação' },
+    ],
     dialogLabel: 'Dados de contato de Marcelo Soiber',
     closeLabel: 'Fechar contato',
     role: 'Engenheiro de Software · Arquitetura & IA',

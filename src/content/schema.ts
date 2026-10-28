@@ -137,6 +137,8 @@ export interface SiteContent {
     eyebrow: string
     title: string
     description: string
+    about: string[]
+    highlights: Array<{ value: string; label: string }>
     dialogLabel: string
     closeLabel: string
     role: string

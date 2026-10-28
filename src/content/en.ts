@@ -374,6 +374,15 @@ export const en: SiteContent = {
     title: 'Let’s talk about systems worth building.',
     description:
       'Architecture, applied AI, software engineering, or a good technical question: the channel is open.',
+    about: [
+      'I enjoy turning ambiguous problems into clear decisions and sustainable software. I work close to product and operations, asking the right questions before choosing tools.',
+      'I am especially interested in architecture, applied AI, and systems modernization — particularly when there is a difficult technical challenge with real business impact.',
+    ],
+    highlights: [
+      { value: '9+', label: 'years building software' },
+      { value: 'ARCH · PROD · EXEC', label: 'end-to-end perspective' },
+      { value: 'PT · EN · ES', label: 'communication' },
+    ],
     dialogLabel: 'Marcelo Soiber contact details',
     closeLabel: 'Close contact',
     role: 'Software Engineer · Architecture & AI',

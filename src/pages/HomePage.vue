@@ -416,6 +416,17 @@ onBeforeUnmount(() => {
             <h2>{{ content.contact.title }}</h2>
             <p class="contact-modal__description">{{ content.contact.description }}</p>
 
+            <div class="contact-modal__about">
+              <p v-for="paragraph in content.contact.about" :key="paragraph">{{ paragraph }}</p>
+            </div>
+
+            <dl class="contact-modal__highlights">
+              <div v-for="highlight in content.contact.highlights" :key="highlight.label">
+                <dt>{{ highlight.value }}</dt>
+                <dd>{{ highlight.label }}</dd>
+              </div>
+            </dl>
+
             <div class="contact-modal__links">
               <a class="contact-action contact-action--email" :href="`mailto:${email}`">
                 <span>{{ content.contact.emailLabel }}</span>
