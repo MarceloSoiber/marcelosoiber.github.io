@@ -21,51 +21,126 @@ export const pt: SiteContent = {
   ],
   languageLabel: 'Selecionar idioma',
   hero: {
-    eyebrow: 'ENGENHARIA DE SOFTWARE // ARQUITETURA // IA APLICADA',
-    titleLead: 'Construo sistemas que transformam',
-    titleFocus: 'complexidade em clareza.',
+    eyebrow: 'BEM-VINDO // SISTEMA DE NAVEGAÇÃO',
+    titleLead: 'Um mapa de como penso,',
+    titleFocus: 'construo e evoluo sistemas.',
     description:
-      'Engenheiro de Software especializado em arquitetura, sistemas inteligentes e IA aplicada. Mais de dez anos convertendo problemas reais em software confiável.',
-    primaryCta: 'Explorar sistemas',
+      'Engenharia de software, arquitetura e IA aplicada apresentadas por meio de decisões, sistemas e uma trajetória construída em problemas reais.',
+    primaryCta: 'Abrir mapa',
     secondaryCta: 'Baixar currículo',
-    telemetryLabel: 'Núcleo profissional',
-    telemetryValue: 'ARCH · AI · SYSTEMS',
+    telemetryLabel: 'Núcleo do portfólio',
+    telemetryValue: 'PROFILE · SYSTEMS · PATH',
     statusLabel: 'Operacional',
+  },
+  homeMap: {
+    eyebrow: '00 // MAPA DO SISTEMA',
+    title: 'Escolha um ponto de entrada.',
+    description:
+      'Cada rota revela uma parte diferente do trabalho: pensamento, sistemas construídos, trajetória e conversa.',
+    items: [
+      {
+        index: '01',
+        page: 'profile',
+        title: 'Perfil',
+        description: 'Como penso, tomo decisões e conduzo o trabalho.',
+        signal: 'MÉTODO / PRINCÍPIOS',
+      },
+      {
+        index: '02',
+        page: 'projects',
+        title: 'Sistemas',
+        description: 'Estudos de caso com arquitetura, trade-offs e código.',
+        signal: 'CASOS / CÓDIGO',
+      },
+      {
+        index: '03',
+        page: 'experience',
+        title: 'Experiência',
+        description: 'A trajetória profissional, a formação e os reconhecimentos.',
+        signal: 'CARREIRA / FORMAÇÃO',
+      },
+      {
+        index: '04',
+        page: 'contact',
+        title: 'Contato',
+        description: 'Um canal direto para projetos, desafios técnicos e boas conversas.',
+        signal: 'CANAL / ABERTO',
+      },
+    ],
   },
   profile: {
     eyebrow: '01 // PERFIL DE MISSÃO',
     title: 'Engenharia orientada a decisões, não a modismos.',
-    lead: 'Minha especialidade está na interseção entre arquitetura, produto e execução.',
-    body: 'Atuo há mais de dez anos no desenvolvimento de software, incluindo soluções para meios de pagamentos. Trabalho com Python, PHP e TypeScript, conectando APIs, dados, aplicações web e inteligência artificial com atenção a privacidade, operação e resultado de negócio.',
-    metrics: [
-      { value: '10+', label: 'anos de engenharia' },
-      { value: '04', label: 'sistemas em destaque' },
-      { value: 'PT·EN·ES', label: 'presença internacional' },
+    lead: 'Minha forma de trabalhar combina arquitetura, contexto de produto e responsabilidade pela operação.',
+    body: [
+      'Começo pelo problema, pelas restrições e pelas decisões que precisam ser tomadas. Só então escolho ferramentas, desenho contratos e conecto interfaces, serviços, dados e automação em uma solução coerente.',
+      'Ao longo de mais de dez anos, passei pelo desenvolvimento full stack, por sistemas críticos de pagamentos e pela modernização de aplicações. Hoje, aplico essa experiência em arquitetura e IA, com atenção a rastreabilidade, privacidade e continuidade operacional.',
+    ],
+    principlesCode: 'MODO.OPERACAO // 03 PRINCIPIOS',
+    principlesTitle: 'Como conduzo o trabalho',
+    principles: [
+      {
+        index: 'P.01',
+        title: 'Clareza antes da ferramenta',
+        description:
+          'Entender o problema, as restrições e os trade-offs antes de definir tecnologia ou arquitetura.',
+      },
+      {
+        index: 'P.02',
+        title: 'Produto e operação na mesma conversa',
+        description:
+          'Aproximar necessidades de negócio, decisões técnicas e realidade operacional durante toda a evolução do sistema.',
+      },
+      {
+        index: 'P.03',
+        title: 'Evoluir sem perder o controle',
+        description:
+          'Modernizar por meio de fronteiras e contratos explícitos, preservando rastreabilidade e continuidade.',
+      },
     ],
   },
   capabilities: {
     eyebrow: '02 // MATRIZ DE CAPACIDADE',
     title: 'Da arquitetura ao software em produção.',
     description:
-      'Competências demonstradas em sistemas completos, com decisões técnicas, restrições e operação explícitas.',
+      'Três frentes conectadas por uma mesma abordagem: contexto antes da solução, decisões explícitas e responsabilidade pela operação.',
+    evidenceLabel: 'Evidências na prática',
     items: [
       {
         index: 'A.01',
         title: 'Arquitetura de software',
-        description: 'Fronteiras, contratos, fluxos assíncronos e decisões evolutivas.',
+        description:
+          'Transformar contexto e restrições em fronteiras, contratos e decisões que possam evoluir.',
+        evidence: [
+          'APIs e fluxos assíncronos',
+          'Monólitos modulares e microsserviços',
+          'Integrações por MCP e SSE',
+        ],
         technologies: ['APIs', 'MCP', 'SSE', 'Docker'],
       },
       {
         index: 'A.02',
-        title: 'Sistemas inteligentes',
-        description: 'RAG, embeddings, busca vetorial e integração responsável de modelos.',
-        technologies: ['LLMs', 'RAG', 'pgvector', 'ML'],
+        title: 'IA aplicada',
+        description:
+          'Integrar modelos com contexto, rastreabilidade e validação, mantendo a decisão final com pessoas.',
+        evidence: [
+          'RAG, embeddings e busca vetorial',
+          'Prompting, RAG e fine-tuning comparáveis',
+          'Inferência local e acesso controlado',
+        ],
+        technologies: ['LLMs', 'RAG', 'pgvector', 'Fine-tuning'],
       },
       {
         index: 'A.03',
-        title: 'Engenharia full stack',
-        description: 'Interfaces, serviços, persistência e automação como uma solução coerente.',
-        technologies: ['Angular', 'Node.js', 'FastAPI', 'PostgreSQL'],
+        title: 'Modernização de sistemas',
+        description:
+          'Evoluir sistemas existentes com atenção à operação, aos dados e à continuidade do negócio.',
+        evidence: [
+          'PHP e Laravel para microsserviços Python',
+          'Infraestrutura automatizada na AWS',
+          'APIs de pagamentos e bancos relacionais',
+        ],
+        technologies: ['Python', 'PHP / Laravel', 'AWS', 'CloudFormation', 'SQL'],
       },
     ],
   },

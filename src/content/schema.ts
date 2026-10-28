@@ -55,7 +55,14 @@ export interface Capability {
   index: string
   title: string
   description: string
+  evidence: string[]
   technologies: string[]
+}
+
+export interface ProfilePrinciple {
+  index: string
+  title: string
+  description: string
 }
 
 export interface CareerItem {
@@ -84,6 +91,14 @@ export interface Note {
   projectId: string
 }
 
+export interface HomeMapItem {
+  index: string
+  page: Exclude<Page, 'home'> | 'contact'
+  title: string
+  description: string
+  signal: string
+}
+
 export interface SiteContent {
   locale: Locale
   htmlLang: string
@@ -109,17 +124,26 @@ export interface SiteContent {
     telemetryValue: string
     statusLabel: string
   }
+  homeMap: {
+    eyebrow: string
+    title: string
+    description: string
+    items: HomeMapItem[]
+  }
   profile: {
     eyebrow: string
     title: string
     lead: string
-    body: string
-    metrics: Array<{ value: string; label: string }>
+    body: string[]
+    principlesCode: string
+    principlesTitle: string
+    principles: ProfilePrinciple[]
   }
   capabilities: {
     eyebrow: string
     title: string
     description: string
+    evidenceLabel: string
     items: Capability[]
   }
   projects: {

@@ -139,6 +139,10 @@ function closeContactOnBackdrop(event: MouseEvent) {
   if (event.target === contactDialog.value) closeContact()
 }
 
+function homeMapRoute(page: Exclude<Page, 'home'>) {
+  return pageRoute(locale.value, page)
+}
+
 function openProjectDetails(project: Project) {
   selectedProject.value = project
 }
@@ -182,6 +186,14 @@ onBeforeUnmount(() => {
       @open-contact="openContact"
     />
 
+    <TelemetryCore
+      v-if="currentPage !== 'home'"
+      variant="ambient"
+      :label="content.hero.telemetryLabel"
+      :value="content.hero.telemetryValue"
+      :status="content.hero.statusLabel"
+    />
+
     <main id="main" :class="{ 'inner-page': currentPage !== 'home' }">
       <section v-if="currentPage === 'home'" class="hero" aria-labelledby="hero-title">
         <div class="hero__copy">
@@ -192,10 +204,10 @@ onBeforeUnmount(() => {
           </h1>
           <p class="hero__description">{{ content.hero.description }}</p>
           <div class="hero__actions">
-            <RouterLink class="button button--primary" :to="pageRoute(locale, 'projects')">
+            <a class="button button--primary" href="#mapa">
               {{ content.hero.primaryCta }}
               <span aria-hidden="true">↘</span>
-            </RouterLink>
+            </a>
             <a
               class="button button--ghost"
               :href="content.contact.resumeHref"
@@ -224,18 +236,84 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
+      <section
+        v-if="currentPage === 'home'"
+        id="mapa"
+        class="home-map section-shell"
+        aria-labelledby="home-map-title"
+      >
+        <header class="home-map__header reveal">
+          <div>
+            <span class="home-map__eyebrow">{{ content.homeMap.eyebrow }}</span>
+            <h2 id="home-map-title">{{ content.homeMap.title }}</h2>
+          </div>
+          <p>{{ content.homeMap.description }}</p>
+        </header>
+
+        <nav class="home-map__grid" aria-labelledby="home-map-title">
+          <template v-for="(item, index) in content.homeMap.items" :key="item.page">
+            <RouterLink
+              v-if="item.page !== 'contact'"
+              class="home-map__item reveal"
+              :style="{ '--delay': `${index * 70}ms` }"
+              :to="homeMapRoute(item.page)"
+            >
+              <span class="home-map__index">{{ item.index }}</span>
+              <span class="home-map__signal">{{ item.signal }}</span>
+              <strong>{{ item.title }}</strong>
+              <p>{{ item.description }}</p>
+              <i aria-hidden="true">↗</i>
+            </RouterLink>
+            <button
+              v-else
+              class="home-map__item reveal"
+              type="button"
+              :style="{ '--delay': `${index * 70}ms` }"
+              @click="openContact"
+            >
+              <span class="home-map__index">{{ item.index }}</span>
+              <span class="home-map__signal">{{ item.signal }}</span>
+              <strong>{{ item.title }}</strong>
+              <p>{{ item.description }}</p>
+              <i aria-hidden="true">↗</i>
+            </button>
+          </template>
+        </nav>
+      </section>
+
       <section v-if="currentPage === 'profile'" id="perfil" class="profile section-shell page-section">
         <SectionHeader :eyebrow="content.profile.eyebrow" :title="content.profile.title" />
 
-        <div class="profile__grid reveal">
-          <p class="profile__lead">{{ content.profile.lead }}</p>
-          <p class="profile__body">{{ content.profile.body }}</p>
-          <dl class="metric-grid">
-            <div v-for="metric in content.profile.metrics" :key="metric.label">
-              <dt>{{ metric.value }}</dt>
-              <dd>{{ metric.label }}</dd>
+        <div class="profile__operating">
+          <div class="profile__narrative reveal">
+            <p class="profile__lead">{{ content.profile.lead }}</p>
+            <div class="profile__body">
+              <p v-for="paragraph in content.profile.body" :key="paragraph">{{ paragraph }}</p>
             </div>
-          </dl>
+
+            <dl class="profile-facts">
+              <div v-for="fact in content.contact.highlights" :key="fact.label">
+                <dt>{{ fact.value }}</dt>
+                <dd>{{ fact.label }}</dd>
+              </div>
+            </dl>
+          </div>
+
+          <section class="profile-principles reveal" aria-labelledby="principles-title">
+            <header class="profile-principles__header">
+              <span>{{ content.profile.principlesCode }}</span>
+              <h3 id="principles-title">{{ content.profile.principlesTitle }}</h3>
+            </header>
+            <ol>
+              <li v-for="principle in content.profile.principles" :key="principle.index">
+                <span>{{ principle.index }}</span>
+                <div>
+                  <h4>{{ principle.title }}</h4>
+                  <p>{{ principle.description }}</p>
+                </div>
+              </li>
+            </ol>
+          </section>
         </div>
       </section>
 
@@ -256,7 +334,17 @@ onBeforeUnmount(() => {
             <div class="capability-card__index">{{ capability.index }}</div>
             <h3>{{ capability.title }}</h3>
             <p>{{ capability.description }}</p>
-            <ul>
+
+            <div class="capability-card__evidence">
+              <span>{{ content.capabilities.evidenceLabel }}</span>
+              <ul>
+                <li v-for="evidence in capability.evidence" :key="evidence">
+                  {{ evidence }}
+                </li>
+              </ul>
+            </div>
+
+            <ul class="capability-card__technologies">
               <li v-for="technology in capability.technologies" :key="technology">
                 {{ technology }}
               </li>
@@ -265,12 +353,7 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
-      <section
-        v-if="currentPage === 'projects' || currentPage === 'home'"
-        id="projetos"
-        class="projects section-shell"
-        :class="{ 'projects--featured': currentPage === 'home' }"
-      >
+      <section v-if="currentPage === 'projects'" id="projetos" class="projects section-shell">
         <SectionHeader
           :eyebrow="content.projects.eyebrow"
           :title="content.projects.title"
@@ -279,9 +362,7 @@ onBeforeUnmount(() => {
 
         <div class="projects__list">
           <ProjectCaseStudy
-            v-for="(project, index) in currentPage === 'home'
-              ? content.projects.items.slice(0, 1)
-              : content.projects.items"
+            v-for="(project, index) in content.projects.items"
             :key="project.id"
             :project="project"
             :position="index"
@@ -294,10 +375,6 @@ onBeforeUnmount(() => {
             @open-details="openProjectDetails"
           />
         </div>
-
-        <RouterLink v-if="currentPage === 'home'" class="section-more" :to="pageRoute(locale, 'projects')">
-          {{ content.hero.primaryCta }} <span aria-hidden="true">→</span>
-        </RouterLink>
       </section>
 
       <section

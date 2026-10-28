@@ -21,51 +21,125 @@ export const en: SiteContent = {
   ],
   languageLabel: 'Select language',
   hero: {
-    eyebrow: 'SOFTWARE ENGINEERING // ARCHITECTURE // APPLIED AI',
-    titleLead: 'I build systems that turn',
-    titleFocus: 'complexity into clarity.',
+    eyebrow: 'WELCOME // NAVIGATION SYSTEM',
+    titleLead: 'A map of how I think,',
+    titleFocus: 'build, and evolve systems.',
     description:
-      'Software Engineer specializing in architecture, intelligent systems, and applied AI. Over ten years turning real problems into reliable software.',
-    primaryCta: 'Explore systems',
+      'Software engineering, architecture, and applied AI presented through decisions, working systems, and a journey shaped by real-world problems.',
+    primaryCta: 'Open map',
     secondaryCta: 'Download CV',
-    telemetryLabel: 'Professional core',
-    telemetryValue: 'ARCH · AI · SYSTEMS',
+    telemetryLabel: 'Portfolio core',
+    telemetryValue: 'PROFILE · SYSTEMS · PATH',
     statusLabel: 'Operational',
+  },
+  homeMap: {
+    eyebrow: '00 // SYSTEM MAP',
+    title: 'Choose an entry point.',
+    description:
+      'Each route reveals a different part of the work: thinking, built systems, professional journey, and conversation.',
+    items: [
+      {
+        index: '01',
+        page: 'profile',
+        title: 'Profile',
+        description: 'How I think, make decisions, and approach the work.',
+        signal: 'METHOD / PRINCIPLES',
+      },
+      {
+        index: '02',
+        page: 'projects',
+        title: 'Systems',
+        description: 'Case studies with architecture, trade-offs, and code.',
+        signal: 'CASES / CODE',
+      },
+      {
+        index: '03',
+        page: 'experience',
+        title: 'Experience',
+        description: 'Professional journey, education, and recognition.',
+        signal: 'CAREER / EDUCATION',
+      },
+      {
+        index: '04',
+        page: 'contact',
+        title: 'Contact',
+        description: 'A direct channel for projects, technical challenges, and good conversations.',
+        signal: 'CHANNEL / OPEN',
+      },
+    ],
   },
   profile: {
     eyebrow: '01 // MISSION PROFILE',
     title: 'Engineering driven by decisions, not trends.',
-    lead: 'My specialty lives at the intersection of architecture, product, and execution.',
-    body: 'I have worked in software development for over ten years, including payment technology. I build with Python, PHP, and TypeScript, connecting APIs, data, web applications, and artificial intelligence with a focus on privacy, operations, and business outcomes.',
-    metrics: [
-      { value: '10+', label: 'years in engineering' },
-      { value: '04', label: 'featured systems' },
-      { value: 'PT·EN·ES', label: 'international presence' },
+    lead: 'My way of working combines architecture, product context, and responsibility for operations.',
+    body: [
+      'I start with the problem, its constraints, and the decisions that need to be made. Only then do I choose tools, design contracts, and connect interfaces, services, data, and automation into one coherent solution.',
+      'Over more than ten years, I have worked across full-stack development, critical payment systems, and application modernization. Today, I bring that experience to architecture and AI, with close attention to traceability, privacy, and operational continuity.',
+    ],
+    principlesCode: 'OPERATING.MODE // 03 PRINCIPLES',
+    principlesTitle: 'How I approach the work',
+    principles: [
+      {
+        index: 'P.01',
+        title: 'Clarity before tools',
+        description:
+          'Understand the problem, constraints, and trade-offs before choosing technology or architecture.',
+      },
+      {
+        index: 'P.02',
+        title: 'Product and operations in the same conversation',
+        description:
+          'Keep business needs, technical decisions, and operational reality connected throughout the system’s evolution.',
+      },
+      {
+        index: 'P.03',
+        title: 'Evolve without losing control',
+        description:
+          'Modernize through explicit boundaries and contracts while preserving traceability and continuity.',
+      },
     ],
   },
   capabilities: {
     eyebrow: '02 // CAPABILITY MATRIX',
     title: 'From architecture to production software.',
     description:
-      'Skills demonstrated in complete systems, with explicit technical decisions, constraints, and operations.',
+      'Three connected disciplines guided by the same approach: context before solutions, explicit decisions, and responsibility for operations.',
+    evidenceLabel: 'Evidence in practice',
     items: [
       {
         index: 'A.01',
         title: 'Software architecture',
-        description: 'Boundaries, contracts, asynchronous flows, and evolutionary decisions.',
+        description:
+          'Turn context and constraints into boundaries, contracts, and decisions that can evolve.',
+        evidence: [
+          'APIs and asynchronous flows',
+          'Modular monoliths and microservices',
+          'MCP and SSE integrations',
+        ],
         technologies: ['APIs', 'MCP', 'SSE', 'Docker'],
       },
       {
         index: 'A.02',
-        title: 'Intelligent systems',
-        description: 'RAG, embeddings, vector search, and responsible model integration.',
-        technologies: ['LLMs', 'RAG', 'pgvector', 'ML'],
+        title: 'Applied AI',
+        description:
+          'Integrate models with context, traceability, and validation while keeping final decisions with people.',
+        evidence: [
+          'RAG, embeddings, and vector search',
+          'Comparable prompting, RAG, and fine-tuning',
+          'Local inference and controlled access',
+        ],
+        technologies: ['LLMs', 'RAG', 'pgvector', 'Fine-tuning'],
       },
       {
         index: 'A.03',
-        title: 'Full-stack engineering',
-        description: 'Interfaces, services, persistence, and automation as one coherent solution.',
-        technologies: ['Angular', 'Node.js', 'FastAPI', 'PostgreSQL'],
+        title: 'Systems modernization',
+        description: 'Evolve existing systems with attention to operations, data, and business continuity.',
+        evidence: [
+          'PHP and Laravel to Python microservices',
+          'Automated infrastructure on AWS',
+          'Payment APIs and relational databases',
+        ],
+        technologies: ['Python', 'PHP / Laravel', 'AWS', 'CloudFormation', 'SQL'],
       },
     ],
   },
